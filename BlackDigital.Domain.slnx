@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/BlackDigital.Domain.csproj" Id="399a774e-7de6-49f9-834b-1b0495458d62" />
+  <Project Path="test/BlackDigital.Domain.Test.csproj" Id="a1b2c3d4-7de6-49f9-834b-1b0495458d62" />
+</Solution>

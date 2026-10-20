@@ -40,6 +40,7 @@ Read [references/infrastructure.md](references/infrastructure.md) for details be
 - `JwtTokenService` enforces a **32-byte (256-bit)** minimum secret key for HMAC-SHA256 and uses `ClockSkew = TimeSpan.Zero`.
 - `JwtTokenService` is the renamed `JwtService` from BlackDigital.AspNet.
 - `IPasswordHashService` defines the contract; implementations (e.g. Argon2id) live in consuming projects or other libraries.
+- `AuthorizeAttribute` is a dependency-free metadata marker for classes, interfaces and methods, with nullable `Roles` and `Policy` properties (both null means authenticated only). It is never enforced by this library — consumers read it.
 - Constructor validation fails fast: `ArgumentException` for short secret, empty issuer/audience; `ArgumentOutOfRangeException` for non-positive expiration.
 
 Read [references/security.md](references/security.md) before editing security code or examples.

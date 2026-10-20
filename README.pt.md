@@ -18,6 +18,7 @@ O **BlackDigital.Domain** é uma biblioteca compartilhada de blocos de infraestr
 - **Infraestrutura de Email**: Serviço de email SMTP (via MailKitLite) com suporte a múltiplos provedores e renderização de templates HTML
 - **Serviço de Tokens JWT**: Gere, valide e inspecione tokens JWT
 - **Hash de Senhas**: Interface de hash de senhas Argon2id
+- **Atributo de Autorização**: Metadado `[Authorize]` sem dependências, com `Roles` e `Policy` anuláveis, para classes, interfaces e métodos
 
 ## Instalação
 
@@ -67,6 +68,16 @@ var claims = new[]
 };
 
 string token = tokenService.GenerateToken(Guid.NewGuid(), claims);
+
+[Authorize]
+public interface IUserService
+{
+    [Authorize(Roles = new[] { "Admin", "Manager" })]
+    Task<IEnumerable<User>> ListUsersAsync();
+
+    [Authorize(Policy = "Category.Write")]
+    Task SaveUserAsync([Body] SaveUser user);
+}
 ```
 
 [Documentação Completa de Segurança](doc/security.pt.md)
@@ -77,7 +88,7 @@ string token = tokenService.GenerateToken(Guid.NewGuid(), claims);
 BlackDigital.Domain/
 ├── src/
 │   ├── Infrastructures/   # Serviços de email (SMTP + templates)
-│   └── Security/          # Serviços de JWT e hash de senhas
+│   └── Security/          # Serviços de JWT, hash de senhas e atributos de autorização
 ├── test/                  # Testes unitários
 ├── doc/                   # Documentação
 └── README.md

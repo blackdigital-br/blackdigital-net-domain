@@ -18,6 +18,7 @@
 - **Email Infrastructure**: SMTP email service (via MailKitLite) with multi-provider support and HTML template rendering
 - **JWT Token Service**: Generate, validate, and inspect JWT tokens
 - **Password Hashing**: Argon2id password hashing interface
+- **Authorization Attribute**: Dependency-free `[Authorize]` metadata with nullable `Roles` and `Policy` for classes, interfaces and methods
 
 ## Installation
 
@@ -67,6 +68,16 @@ var claims = new[]
 };
 
 string token = tokenService.GenerateToken(Guid.NewGuid(), claims);
+
+[Authorize]
+public interface IUserService
+{
+    [Authorize(Roles = new[] { "Admin", "Manager" })]
+    Task<IEnumerable<User>> ListUsersAsync();
+
+    [Authorize(Policy = "Category.Write")]
+    Task SaveUserAsync([Body] SaveUser user);
+}
 ```
 
 [Full Security Documentation](doc/security.md)
@@ -77,7 +88,7 @@ string token = tokenService.GenerateToken(Guid.NewGuid(), claims);
 BlackDigital.Domain/
 ├── src/
 │   ├── Infrastructures/   # Email services (SMTP + templates)
-│   └── Security/          # JWT and password hashing services
+│   └── Security/          # JWT, password hashing and authorization attributes
 ├── test/                  # Unit tests
 ├── doc/                   # Documentation
 └── README.md

@@ -68,8 +68,25 @@ public interface IPasswordHashService
 
 There is **no built-in implementation** in this library. Consuming projects provide their own (e.g. Argon2id, BCrypt).
 
+## Authorization attribute
+
+A single dependency-free metadata attribute marks access requirements on classes, interfaces and methods:
+
+```csharp
+[Authorize]                                            // any authenticated user
+[Authorize(Roles = new[] { "Admin", "Manager" })]      // at least one of the listed roles
+[Authorize(Policy = "Category.Write")]                 // named authorization policy
+[Authorize(Roles = new[] { "Admin" }, Policy = "X")]   // both
+```
+
+- It is **metadata only** — this library never enforces it; the consuming application reads it.
+- `Roles` (`string[]?`) and `Policy` (`string?`) are nullable; when omitted, only authentication is required.
+- `AttributeUsage`: `Class | Interface | Method`, `AllowMultiple = false`, `Inherited = true`.
+- No validation is performed: the attribute holds the declared values as-is.
+
 ## Source files
 
 - `src/Security/JwtTokenService.cs`
 - `src/Security/ITokenService.cs`
 - `src/Security/IPasswordHashService.cs`
+- `src/Security/AuthorizeAttribute.cs`

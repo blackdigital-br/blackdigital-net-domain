@@ -131,6 +131,35 @@ public class UserService
 | `HashPassword(string password)` | Retorna o hash da senha |
 | `VerifyPassword(string password, string hashedPassword)` | Retorna `true` se a senha corresponde ao hash |
 
+## Atributo de Autorização
+
+A biblioteca disponibiliza um único atributo sem dependências que marca classes, interfaces e métodos com seus requisitos de acesso. Ele é **apenas metadado** — a biblioteca nunca o aplica. A aplicação consumidora (um middleware REST, um filtro do ASP.NET Core, um job runner, etc.) é quem o lê e rejeita requisições não autorizadas.
+
+```csharp
+using BlackDigital.Domain.Security;
+
+[Authorize]                                            // qualquer usuário autenticado
+public interface IUserService
+{
+    [Authorize(Roles = new[] { "Admin", "Manager" })]  // pelo menos um dos papéis listados
+    Task<IEnumerable<User>> ListUsersAsync();
+
+    [Authorize(Policy = "Category.Write")]             // política de autorização nomeada
+    Task SaveUserAsync([Body] SaveUser user);
+}
+```
+
+| Propriedade | Requisito |
+|-------------|-----------|
+| *(nenhuma)* | O chamador precisa estar autenticado. Nenhum papel ou política é avaliado. |
+| `Roles` | O usuário autenticado precisa ter pelo menos um dos papéis listados. |
+| `Policy` | O usuário autenticado precisa satisfazer a política nomeada. |
+
+Observações:
+
+- `Roles` e `Policy` são anuláveis e podem ser combinados em um único atributo: `[Authorize(Roles = new[] { "Admin" }, Policy = "Category.Write")]`.
+- O atributo pode ser aplicado em classes, interfaces e métodos e é herdado — um requisito declarado em uma classe base ou em um membro sobrescrito continua visível via reflection.
+
 ## Documentação Relacionada
 
 - [Documentação Principal](../README.pt.md)

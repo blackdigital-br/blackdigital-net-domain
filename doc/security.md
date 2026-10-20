@@ -131,6 +131,35 @@ public class UserService
 | `HashPassword(string password)` | Returns the hash of the password |
 | `VerifyPassword(string password, string hashedPassword)` | Returns `true` if the password matches the hash |
 
+## Authorization Attribute
+
+The library ships a single dependency-free attribute that marks classes, interfaces, and methods with their access requirements. It is **metadata only** — the library never enforces it. The consuming application (a REST middleware, an ASP.NET Core filter, a job runner, and so on) reads it and rejects unauthorized requests.
+
+```csharp
+using BlackDigital.Domain.Security;
+
+[Authorize]                                            // any authenticated user
+public interface IUserService
+{
+    [Authorize(Roles = new[] { "Admin", "Manager" })]  // at least one of the listed roles
+    Task<IEnumerable<User>> ListUsersAsync();
+
+    [Authorize(Policy = "Category.Write")]             // named authorization policy
+    Task SaveUserAsync([Body] SaveUser user);
+}
+```
+
+| Property | Requirement |
+|----------|-------------|
+| *(none)* | The caller must be authenticated. No role or policy is evaluated. |
+| `Roles` | The authenticated user must hold at least one of the listed roles. |
+| `Policy` | The authenticated user must satisfy the named policy. |
+
+Notes:
+
+- `Roles` and `Policy` are nullable and can be combined in a single attribute: `[Authorize(Roles = new[] { "Admin" }, Policy = "Category.Write")]`.
+- The attribute applies to classes, interfaces, and methods, and is inherited — a requirement declared on a base class or overridden member remains visible through reflection.
+
 ## Related Documentation
 
 - [Main Documentation](../README.md)

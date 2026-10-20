@@ -17,6 +17,7 @@ It provides:
 - `src/Security/`
   - `JwtTokenService` / `ITokenService` — JWT generation, validation, refresh tokens, token id extraction
   - `IPasswordHashService` — password hashing contract
+  - `AuthorizeAttribute` — dependency-free authorization metadata (class/interface/method) with nullable `Roles` and `Policy`; not enforced by the library
 
 ## Main docs
 
@@ -31,6 +32,7 @@ It provides:
   - `src/Security/JwtTokenService.cs`
   - `src/Security/ITokenService.cs`
   - `src/Security/IPasswordHashService.cs`
+  - `src/Security/AuthorizeAttribute.cs`
 - Email behavior
   - `src/Infrastructures/SmtpEmailService.cs`
   - `src/Infrastructures/HtmlTemplateEmailService.cs`

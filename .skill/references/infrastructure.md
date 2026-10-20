@@ -9,7 +9,7 @@ The email infrastructure has two layers: a low-level `IEmailService` (sends raw 
 There are **no `Add*` extension methods** in this library. Register manually:
 
 ```csharp
-// SMTP sender (MailKit)
+// SMTP sender (MailKitLite)
 services.AddTransient<IEmailService, SmtpEmailService>();
 
 // HTML template email service (depends on IEmailService)

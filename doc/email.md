@@ -2,7 +2,7 @@
 
 [🇧🇷 Português](email.pt.md) | 🇺🇸 English
 
-The Email module provides an SMTP email service (via MailKit) with optional HTML template support. It supports multiple providers with fallback configuration.
+The Email module provides an SMTP email service (via MailKitLite) with optional HTML template support. It supports multiple providers with fallback configuration.
 
 ## Configuration
 

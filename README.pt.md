@@ -15,7 +15,7 @@ O **BlackDigital.Domain** é uma biblioteca compartilhada de blocos de infraestr
 
 ### Principais Funcionalidades
 
-- **Infraestrutura de Email**: Serviço de email SMTP (via MailKit) com suporte a múltiplos provedores e renderização de templates HTML
+- **Infraestrutura de Email**: Serviço de email SMTP (via MailKitLite) com suporte a múltiplos provedores e renderização de templates HTML
 - **Serviço de Tokens JWT**: Gere, valide e inspecione tokens JWT
 - **Hash de Senhas**: Interface de hash de senhas Argon2id
 

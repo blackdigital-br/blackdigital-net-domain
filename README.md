@@ -15,7 +15,7 @@
 
 ### Key Features
 
-- **Email Infrastructure**: SMTP email service (via MailKit) with multi-provider support and HTML template rendering
+- **Email Infrastructure**: SMTP email service (via MailKitLite) with multi-provider support and HTML template rendering
 - **JWT Token Service**: Generate, validate, and inspect JWT tokens
 - **Password Hashing**: Argon2id password hashing interface
 

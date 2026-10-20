@@ -7,7 +7,7 @@ using MimeKit;
 namespace BlackDigital.Domain.Infrastructures
 {
     /// <summary>
-    /// Email service implementation using the SMTP protocol via MailKit.
+    /// Email service implementation using the SMTP protocol via MailKitLite.
     /// Supports multiple email providers (Gmail, Outlook, etc.) with flexible per-provider
     /// configuration and fallback to the default <c>Email:</c> section.
     /// </summary>
@@ -46,7 +46,7 @@ namespace BlackDigital.Domain.Infrastructures
         }
 
         /// <summary>
-        /// Sends an email asynchronously using the SMTP protocol via MailKit.
+        /// Sends an email asynchronously using the SMTP protocol via MailKitLite.
         /// Supports per-provider configuration with fallback to the default <c>Email:</c> section.
         /// </summary>
         /// <param name="email">The <see cref="Email"/> containing recipients, subject, body and settings.</param>

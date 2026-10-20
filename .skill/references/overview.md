@@ -5,14 +5,14 @@
 BlackDigital.Domain is a shared library of infrastructure and security building blocks designed to be reused across any .NET backend project — REST APIs, background jobs, worker services, Azure Functions, and more. It has **no dependency on ASP.NET Core**, so it can be referenced from any project type.
 
 It provides:
-- **Email infrastructure**: SMTP email service (via MailKit) with multi-provider support and HTML template rendering
+- **Email infrastructure**: SMTP email service (via MailKitLite) with multi-provider support and HTML template rendering
 - **JWT token service**: Generate, validate, and inspect JWT tokens
 - **Password hashing interface**: `IPasswordHashService` contract for password hashing
 
 ## Main source areas
 
 - `src/Infrastructures/`
-  - `IEmailService`, `Email`, `BaseEmailService`, `SmtpEmailService` — SMTP sending via MailKit with multi-provider fallback
+  - `IEmailService`, `Email`, `BaseEmailService`, `SmtpEmailService` — SMTP sending via MailKitLite with multi-provider fallback
   - `ITemplateEmailService`, `TemplateEmail`, `BaseTemplateEmailService`, `HtmlTemplateEmailService` — HTML template email with `{{ key }}` placeholders
 - `src/Security/`
   - `JwtTokenService` / `ITokenService` — JWT generation, validation, refresh tokens, token id extraction
